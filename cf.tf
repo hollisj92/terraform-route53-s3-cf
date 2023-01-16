@@ -1,7 +1,4 @@
 # Cloudfront S3 for redirect to www.
-# 
-# 
-# 
 
 
 resource "aws_cloudfront_distribution" "www_s3_distribution" {
@@ -54,6 +51,14 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }
+
+  tags = {
+    Env: "${var.env_prefix}"
+    Service: "${var.env_prefix}-${var.proj_prefix}"
+    Name : "${var.env_prefix}-cf-distribution"
+    Role: "${var.env_prefix}-cf-distribution"
+    Team: "team-${var.team}"
+  }
 }
 
 resource "aws_cloudfront_distribution" "redirect_s3_distribution" {
@@ -105,6 +110,14 @@ resource "aws_cloudfront_distribution" "redirect_s3_distribution" {
     acm_certificate_arn = var.certificate_valiation_arn
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
+  }
+
+  tags = {
+    Env: "${var.env_prefix}"
+    Service: "${var.env_prefix}-${var.proj_prefix}"
+    Name : "${var.env_prefix}-cf-distribution-redirect"
+    Role: "${var.env_prefix}-cf-distribution-redirect"
+    Team: "team-${var.team}"
   }
 
 }

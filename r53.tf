@@ -2,15 +2,19 @@
 # aws route54 records/subdomains
 
 data "aws_route53_zone" "current_domain" {
-  name = var.domain_name_redirect
+  zone_id = var.zone_id
   private_zone = false
+
+  tags = {
+    Env: "${var.env_prefix}"
+    Service: "${var.env_prefix}-${var.proj_prefix}"
+    Name : "${var.env_prefix}-r53-zone"
+    Role: "${var.env_prefix}-r53-zone"
+    Team: "team-${var.team}"
+  }
 }
 
-# 
-# 
-# 
 # main record
-# 
 
 resource "aws_route53_record" "root_s3_route" {
   zone_id = data.aws_route53_zone.current_domain.zone_id
@@ -24,13 +28,9 @@ resource "aws_route53_record" "root_s3_route" {
     evaluate_target_health = false
   }
 }
-# 
-# 
-# 
+
 # redirect record
-# 
-# 
-# 
+
 resource "aws_route53_record" "redirect_s3_route" {
   zone_id = data.aws_route53_zone.current_domain.zone_id
   name    = var.domain_name_redirect

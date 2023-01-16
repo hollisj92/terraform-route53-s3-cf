@@ -15,7 +15,11 @@ resource "aws_s3_bucket" "s3_react_bucket" {
   }  
 
   tags = {
-    Environment = "PROD"
+    Env: "${var.env_prefix}"
+    Service: "${var.env_prefix}-${var.proj_prefix}"
+    Name : "${var.env_prefix}-s3"
+    Role: "${var.env_prefix}-s3"
+    Team: "team-${var.team}"
   }
 }
 
@@ -75,8 +79,13 @@ resource "aws_s3_bucket" "s3_react_bucket_redirect" {
     }
 
 
+  
   tags = {
-    Environment = "PROD"
+    Env: "${var.env_prefix}"
+    Service: "${var.env_prefix}-${var.proj_prefix}"
+    Name : "${var.env_prefix}-s3-redirect"
+    Role: "${var.env_prefix}-s3-redirect"
+    Team: "team-${var.team}"
   }
 }
 

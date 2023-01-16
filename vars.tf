@@ -45,3 +45,23 @@ variable "certificate_valiation_arn" {
   type = string
   sensitive = true
 }
+
+# project variables for cloudwatch
+
+variable "proj_prefix" {
+  description = "Project name"
+  type = string
+  sensitive = true
+}
+
+variable "env_prefix" {
+  description = "Project environment - Prod/Test/Dev"
+  type = string
+  sensitive = true
+}
+
+variable "team" {
+  description = "project team"
+  type = string
+  sensitive = true
+}
