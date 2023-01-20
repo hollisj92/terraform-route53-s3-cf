@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
 
   enabled = true
   is_ipv6_enabled = true
-
+  
   aliases = [var.domain_name]
 
   default_cache_behavior {
